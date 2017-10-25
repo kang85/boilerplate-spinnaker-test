@@ -116,5 +116,5 @@
     "mocha-webpack": "^0.7.0",
     "react-test-renderer": "^15.6.1"
   },
-  "homepage": "https://d2kg3wz95aw1pz.cloudfront.net/"
+  "homepage": "/test"
 }

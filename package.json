@@ -1,0 +1,19 @@
+{
+    "name": "coolsms-microservice-boilerplace",
+    "version": "1.0.0",
+    "description": "",
+    "engines": {
+      "node": "8.4"
+    },
+    "main": "index.js",
+    "scripts": {
+      "start": "node appLocal.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.16.2"
+    }
+  }
+  

@@ -1,0 +1,58 @@
+{
+  "name": "aws-serverless-express-example",
+  "version": "2.1.1",
+  "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
+  "main": "lambda.js",
+  "config": {
+    "s3BucketName": "coolsms.billy.projects",
+    "region": "ap-northeast-2",
+    "cloudFormationStackName": "ArsBackend",
+    "functionName": "expressServer",
+    "accountId": "407506469676"
+  },
+  "scripts": {
+    "sync": "aws s3 sync public s3://$npm_package_config_s3BucketName/$npm_package_config_cloudFormationStackName --acl public-read",
+    "webpack": "webpack --config webpack.config.prod.js",
+    "start": "node appLocal.js",
+    "nodemon:start": "nodemon -w . -x npm run start",
+    "config": "node ./scripts/configure.js",
+    "deconfig": "node ./scripts/deconfigure.js",
+    "local": "node scripts/local",
+    "invoke-lambda": "aws lambda invoke --function-name $npm_package_config_functionName --region $npm_package_config_region --payload file://api-gateway-event.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "create-bucket": "aws s3 mb s3://$npm_package_config_s3BucketName/$npm_package_config_cloudFormationStackName --region $npm_package_config_region",
+    "delete-bucket": "aws s3 rb s3://$npm_package_config_s3BucketName/$npm_package_config_cloudFormationStackName --region $npm_package_config_region",
+    "package": "npm run webpack && aws cloudformation package --template ./cloudformation.yaml --s3-bucket $npm_package_config_s3BucketName --s3-prefix $npm_package_config_cloudFormationStackName/cloudFormation --output-template packaged-sam.yaml --region $npm_package_config_region",
+    "deploy": "aws cloudformation deploy --template-file packaged-sam.yaml --stack-name $npm_package_config_cloudFormationStackName --capabilities CAPABILITY_IAM --region $npm_package_config_region",
+    "package-deploy": "npm run package && npm run deploy && npm run sync",
+    "delete-stack": "aws cloudformation delete-stack --stack-name $npm_package_config_cloudFormationStackName --region $npm_package_config_region",
+    "setup": "npm install && (aws s3api get-bucket-location --bucket $npm_package_config_s3BucketName/$npm_package_config_cloudFormationStackName --region $npm_package_config_region || npm run create-bucket) && npm run package-deploy",
+    "win-config": "npm run config",
+    "win-deconfig": "npm run deconfig",
+    "win-local": "npm run local",
+    "win-invoke-lambda": "aws lambda invoke --function-name %npm_package_config_functionName% --region %npm_package_config_region% --payload file://api-gateway-event.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "win-create-bucket": "aws s3 mb s3://%npm_package_config_s3BucketName% --region %npm_package_config_region%",
+    "win-delete-bucket": "aws s3 rb s3://%npm_package_config_s3BucketName% --region %npm_package_config_region%",
+    "win-package": "aws cloudformation package --template ./cloudformation.yaml --s3-bucket %npm_package_config_s3BucketName% --output-template packaged-sam.yaml --region %npm_package_config_region%",
+    "win-deploy": "aws cloudformation deploy --template-file packaged-sam.yaml --stack-name %npm_package_config_cloudFormationStackName% --capabilities CAPABILITY_IAM --region %npm_package_config_region%",
+    "win-package-deploy": "npm run win-package && npm run win-deploy",
+    "win-delete-stack": "aws cloudformation delete-stack --stack-name %npm_package_config_cloudFormationStackName% --region %npm_package_config_region%",
+    "win-setup": "npm install && (aws s3api get-bucket-location --bucket %npm_package_config_s3BucketName% --region %npm_package_config_region% || npm run win-create-bucket) && npm run win-package-deploy"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-serverless-express": "^3.0.0",
+    "babel-loader": "^7.1.2",
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "morgan": "^1.8.2",
+    "pug": "^2.0.0-rc.1",
+    "webpack": "^3.5.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2017": "^6.24.1"
+  }
+}

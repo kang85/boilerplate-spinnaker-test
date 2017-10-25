@@ -1,0 +1,17 @@
+{
+  "name": "aws-serverless-express-example",
+  "version": "2.1.1",
+  "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
+  "engines": {
+    "node": "8.4"
+  },
+  "main": "appLocal.js",
+  "scripts": {
+    "start": "node appLocal.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "morgan": "^1.8.2",
+    "pug": "^2.0.0-rc.1"
+  }
+}

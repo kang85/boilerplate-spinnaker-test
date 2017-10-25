@@ -8395,7 +8395,11 @@ var path = __webpack_require__(3);
 
 
 // set static path as public
-app.use(express.static(path.join(__dirname, 'public')));
+console.log('path join ', path.join(__dirname, './public'));
+console.log('path join ', path.join(__dirname, '../public'));
+//app.use('/static', express.static(path.join(__dirname, './public')))
+//app.use('/static', express.static('../public'))
+app.use(express.static('./public'));
 // set /api 
 app.use('/api', _api2.default);
 
@@ -20824,10 +20828,13 @@ module.exports.eventContext = options => (req, res, next) => {
 
 
 var app = __webpack_require__(58);
+
 var port = 8080;
 
+if (process.env.NODE_ENV == "development") port = 3030;
+console.log(process.env.NODE_ENV);
 app.listen(port);
-console.log('listening on http://localhost:' + port);
+console.log("listening on http://localhost:" + port);
 
 /***/ })
 /******/ ]);

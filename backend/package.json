@@ -13,7 +13,7 @@
   "scripts": {
     "sync": "aws s3 sync public s3://$npm_package_config_s3BucketName/$npm_package_config_cloudFormationStackName --acl public-read",
     "webpack": "webpack --config webpack.config.prod.js",
-    "start": "node appLocal.js",
+    "start": "NODE_ENV=development node appLocal.js",
     "nodemon:start": "nodemon -w . -x npm run start",
     "config": "node ./scripts/configure.js",
     "deconfig": "node ./scripts/deconfigure.js",

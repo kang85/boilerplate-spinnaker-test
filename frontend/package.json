@@ -69,6 +69,7 @@
     "start": "NODE_PATH=src node scripts/start.js",
     "build": "NODE_PATH=src node scripts/build.js",
     "build:backend": "NODE_PATH=src node scripts/build.backend.js",
+    "build:public": "NODE_PATH=src node scripts/build.public.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
@@ -116,5 +117,5 @@
     "mocha-webpack": "^0.7.0",
     "react-test-renderer": "^15.6.1"
   },
-  "homepage": "/test"
+  "homepage": ""
 }

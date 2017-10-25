@@ -21,9 +21,13 @@ const path = require('path')
 import api from './api'
 
 // set static path as public
-app.use(express.static(path.join(__dirname, 'public')))
+console.log('path join ', path.join(__dirname, './public'))
+console.log('path join ', path.join(__dirname, '../public'))
+//app.use('/static', express.static(path.join(__dirname, './public')))
+//app.use('/static', express.static('../public'))
+app.use(express.static('./public'))
 // set /api 
-app.use('/api', api);
+app.use('/test', api);
 
 app.get('*', (req, res, next) => {
   const statics = ['static', 'thumbnails']

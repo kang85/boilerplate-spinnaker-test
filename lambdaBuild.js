@@ -8395,7 +8395,11 @@ var path = __webpack_require__(3);
 
 
 // set static path as public
-app.use(express.static(path.join(__dirname, 'public')));
+console.log('path join ', path.join(__dirname, './public'));
+console.log('path join ', path.join(__dirname, '../public'));
+//app.use('/static', express.static(path.join(__dirname, './public')))
+//app.use('/static', express.static('../public'))
+app.use(express.static('./public'));
 // set /api 
 app.use('/api', _api2.default);
 

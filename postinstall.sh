@@ -1,1 +1,1 @@
-sudo boilerplate-spinnaker scale web=1
+sudo boilerplate-spinnaker-test scale web=1
